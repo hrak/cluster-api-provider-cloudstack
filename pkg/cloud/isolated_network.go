@@ -41,8 +41,8 @@ type IsoNetworkIface interface {
 }
 
 // getOfferingID fetches an offering id.
-func (c *client) getOfferingID() (string, error) {
-	offeringID, count, retErr := c.cs.NetworkOffering.GetNetworkOfferingID(NetOffering)
+func (c *client) getOfferingID(offeringName string) (string, error) {
+	offeringID, count, retErr := c.cs.NetworkOffering.GetNetworkOfferingID(offeringName)
 	if retErr != nil {
 		c.customMetrics.EvaluateErrorAndIncrementAcsReconciliationErrorCounter(retErr)
 		return "", retErr
@@ -94,7 +94,11 @@ func (c *client) AssociatePublicIPAddress(
 // CreateIsolatedNetwork creates an isolated network in the relevant FailureDomain per passed network specification.
 func (c *client) CreateIsolatedNetwork(fd *infrav1.CloudStackFailureDomain, isoNet *infrav1.CloudStackIsolatedNetwork) (retErr error) {
 	// Get network offering ID.
-	offeringID, err := c.getOfferingID()
+	offeringName := isoNet.Spec.NetworkOffering
+	if offeringName == "" {
+		offeringName = DefaultNetOffering
+	}
+	offeringID, err := c.getOfferingID(offeringName)
 	if err != nil {
 		return err
 	}
