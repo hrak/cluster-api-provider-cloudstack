@@ -34,6 +34,10 @@ type CloudStackIsolatedNetworkSpec struct {
 	//+optional
 	ID string `json:"id,omitempty"`
 
+	// The name of the network offering to use.
+	//+optional
+	NetworkOffering string `json:"networkOffering,omitempty"`
+
 	// The kubernetes control plane endpoint.
 	ControlPlaneEndpoint clusterv1.APIEndpoint `json:"controlPlaneEndpoint"`
 

@@ -127,6 +127,9 @@ spec:
               name:
                 description: Name.
                 type: string
+              networkOffering:
+                description: The name of the network offering to use.
+                type: string
             required:
             - controlPlaneEndpoint
             - failureDomainName

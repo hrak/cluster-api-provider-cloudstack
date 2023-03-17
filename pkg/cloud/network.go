@@ -28,7 +28,7 @@ type NetworkIface interface {
 }
 
 const (
-	NetOffering         = "DefaultIsolatedNetworkOfferingWithSourceNatService"
+	DefaultNetOffering  = "DefaultIsolatedNetworkOfferingWithSourceNatService"
 	K8sDefaultAPIPort   = 6443
 	NetworkTypeIsolated = "Isolated"
 	NetworkTypeShared   = "Shared"
